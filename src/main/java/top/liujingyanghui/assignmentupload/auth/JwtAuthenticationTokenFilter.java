@@ -30,9 +30,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -41,7 +38,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader(this.tokenHeader);
         if (authHeader != null && authHeader.startsWith(tokenHead)) {
             final String authToken = authHeader.substring(tokenHead.length()); // The part after "Bearer "
-            Claims claim = jwtUtil.getClaim(authToken);
+            Claims claim = JwtUtil.getClaim(authToken);
             String email = claim != null && claim.containsKey("email") ? claim.get("email").toString() : "";
             logger.info("checking authentication " + email);
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
