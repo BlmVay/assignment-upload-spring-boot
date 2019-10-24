@@ -13,7 +13,7 @@ import java.util.Collection;
 public class JwtUser implements UserDetails {
     private static final long serialVersionUID = -4959252432107932674L;
     private final long id;
-    private final String email;
+    private final String username;
     private final String password;
     private final String role;
     /** 权限类.*/
@@ -28,7 +28,7 @@ public class JwtUser implements UserDetails {
                    String role,
                    Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.email = email;
+        this.username = email;
         this.password = password;
         this.role = role;
         this.authorities = authorities;
@@ -40,13 +40,18 @@ public class JwtUser implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public String getPassword() {
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
     @Override

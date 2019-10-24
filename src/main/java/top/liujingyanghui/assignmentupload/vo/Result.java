@@ -1,5 +1,8 @@
 package top.liujingyanghui.assignmentupload.vo;
 
+import lombok.Data;
+
+@Data
 public class Result {
 
     private int status;

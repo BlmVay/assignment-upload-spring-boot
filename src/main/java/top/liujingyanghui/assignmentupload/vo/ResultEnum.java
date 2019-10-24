@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 public enum ResultEnum {
 
     SUCCESS(0,"请求成功"),
-    ERROR(1,"请求失败")
+    ERROR(1,"未知错误"),
+
+    USER_IS_EXIST(2,"用户已存在")
 
     ;
     private int status;
