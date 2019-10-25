@@ -22,4 +22,10 @@ public class TestController {
     public Result register(@RequestBody User user) {
         return Result.success(userService.register(user));
     }
+
+    @PostMapping("auth/test")
+    public Result test(@RequestParam Integer a) {
+        System.out.println(a);
+        return Result.success();
+    }
 }

@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * 用户表
+ */
 @Data
 public class User {
 
@@ -31,14 +34,9 @@ public class User {
     private String name;
 
     /**
-     *  学号
+     *  用户详细信息ID
      */
-    private String studentId;
-
-    /**
-     *  性别
-     */
-    private String sex;
+    private Long infoId;
 
     /**
      * 注册时间
