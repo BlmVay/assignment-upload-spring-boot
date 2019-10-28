@@ -12,4 +12,11 @@ public interface UserService extends IService<User> {
      * @return
      */
     LoginVo register(User user);
+
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
+    LoginVo login(User user);
 }

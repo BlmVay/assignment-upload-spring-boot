@@ -11,7 +11,7 @@ public class JwtUtil {
     // 秘钥
     private static final String secret = "sds15644er1rr2gcge3r4ytxgwetwets";
     // 过期时间
-    private static final int timeout = 86400000;//一天86400000  一周604800000
+    private static final int timeout = 7200000;//一天86400000  一周604800000   2小时 7200000
 
     /**
      * 根据token验证获取用户信息

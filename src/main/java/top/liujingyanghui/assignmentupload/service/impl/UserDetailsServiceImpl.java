@@ -45,7 +45,7 @@ public class UserDetailsServiceImpl extends ServiceImpl<UserMapper, User> implem
             throw new UsernameNotFoundException("用户名不存在");
         }
         return new JwtUser(user.getId(), user.getEmail(), user.getPassword(), user.getRole(),
-                Collections.singleton(new SimpleGrantedAuthority(user.getRole())));
+                Collections.singleton(new SimpleGrantedAuthority(user.getRole())),user.getName());
     }
 
     @Override
@@ -61,15 +61,32 @@ public class UserDetailsServiceImpl extends ServiceImpl<UserMapper, User> implem
         user.setCreateTime(LocalDateTime.now());
         user.setLastLoginTime(LocalDateTime.now());
         userMapper.insert(user);
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(user.getEmail(), priPassword);
+        return createLoginVo(user.getEmail());
+    }
+
+    @Override
+    public LoginVo login(User user) {
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final JwtUser jwtUser = loadUserByUsername(user.getEmail());
+        return createLoginVo(user.getEmail());
+    }
+
+    /**
+     * 生成返回登录VO
+     *
+     * @param email
+     * @return
+     */
+    private LoginVo createLoginVo(String email) {
+        final JwtUser jwtUser = loadUserByUsername(email);
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("email", jwtUser.getUsername());
         tokenMap.put("role", jwtUser.getRole());
         LoginVo loginVo = new LoginVo();
-        loginVo.setToken(JwtUtil.setClaim(tokenMap, user.getEmail()));
+        loginVo.setToken(JwtUtil.setClaim(tokenMap, email));
+        loginVo.setName(jwtUser.getName());
+        loginVo.setRole(jwtUser.getRole());
         return loginVo;
     }
 }

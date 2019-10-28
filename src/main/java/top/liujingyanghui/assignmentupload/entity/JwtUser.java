@@ -16,6 +16,7 @@ public class JwtUser implements UserDetails {
     private final String username;
     private final String password;
     private final String role;
+    private final String name;
     /** 权限类.*/
     private final Collection<? extends GrantedAuthority> authorities;
 
@@ -26,12 +27,14 @@ public class JwtUser implements UserDetails {
                    String email,
                    String password,
                    String role,
-                   Collection<? extends GrantedAuthority> authorities) {
+                   Collection<? extends GrantedAuthority> authorities,
+                   String name) {
         this.id = id;
         this.username = email;
         this.password = password;
         this.role = role;
         this.authorities = authorities;
+        this.name = name;
     }
 
     @Override
