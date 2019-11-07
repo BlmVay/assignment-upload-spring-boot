@@ -3,7 +3,7 @@ package top.liujingyanghui.assignmentupload.entity;
 import lombok.Data;
 
 /**
- * 城市
+ * 城市实体
  */
 @Data
 public class City {

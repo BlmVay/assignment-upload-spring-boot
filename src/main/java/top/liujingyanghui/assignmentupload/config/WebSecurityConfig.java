@@ -65,9 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint()).and()
                 .authorizeRequests() // 所有请求都要验证
                 .antMatchers("/api/auth/**").permitAll() // 登录注册等请求过滤
-//				.antMatchers("/api/upload/**", "/api/test/**", "/api/pass/**", "/api/teach/**", "/api/class/**",
-//						"/book-audio/**", "/api/apk/**")
-//				.permitAll() // 测试
+//				.antMatchers("/api/**").permitAll() // 测试
                 .antMatchers("/*.html", "/favicon.ico", "/**/*.html", "/**/*.js", "/**/*.css").permitAll() // 静态资源过滤
                 .anyRequest().fullyAuthenticated().and().exceptionHandling() // 验证不通过的配置
 //                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
